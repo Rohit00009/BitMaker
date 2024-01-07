@@ -6,8 +6,134 @@
 
 body{
     font-family: sans-serif;
+    background-image: url(./wp3433639.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    min-height: 100vh;
+    backdrop-filter: blur(10px);;
 }
 i,svg{
     pointer-events: none;
 }
 
+.kick-pad,.snare-pad,.hihat-pad,.openhat-pad,.exhaust-pad{
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 0.3rem 0.5rem;
+    cursor: pointer;
+}
+
+.kick-pad{
+    background: rgb(220, 136, 220);
+}
+
+.snare-pad{
+    background: rgb(114, 71, 145);
+}
+
+.hihat-pad{
+    background: rgb(107, 107, 230);
+}
+
+.openhat-pad{
+    background: rgb(224, 175, 85);
+}
+
+.exhaust-pad{
+    background: rgb(218, 88, 88);
+}
+
+.kick-pad.active{
+    background: rgb(156, 36, 156);
+}
+
+.snare-pad.active{
+    background: rgb(73, 44, 94);
+}
+
+.hihat-pad.active{
+    background: rgb(53, 53, 117);
+}
+
+.openhat-pad.active{
+    background: rgb(148, 116, 58);
+}
+
+.exhaust-pad.active{
+    background: rgb(146, 55, 55);
+}
+
+
+
+.sequencer{
+    display: flex;
+    min-height: 50vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.kick-track,.snare-track,.hihat-track,.openhat-track,.exhaust-track{
+    display: flex;
+    align-items: center;
+    width: 50%;
+    justify-content: space-between;
+    margin-top: 5rem;
+}
+
+.kick,.snare,.hihat,.openhat,.exhaust{
+    display: flex;
+}
+
+.controls{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+    margin: 0rem 2rem;
+}
+
+.controls h3{
+    background-color: rgba(0, 0, 0, 0.493);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.controls button{
+    padding: 0.2rem;
+    border: none;
+    background: rgb(62, 61, 61);
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.pad{
+    transition: all 0.5s ease;
+}
+
+.play{
+    
+    padding: 0.8rem;
+    font-size: 1rem;
+    background:rgb(62, 61, 61) ;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+select{
+    padding: 0.7rem;
+    font-size: 0.7rem;
+    margin-left: 1rem ;
+}
+
+.play-tempo{
+    display: flex;
+    gap: 3rem;
+    margin: 1.6rem;
+}
