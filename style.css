@@ -81,7 +81,7 @@ i,svg{
     align-items: center;
     width: 50%;
     justify-content: space-between;
-    margin-top: 5rem;
+    margin-top: 4rem;
 }
 
 .kick,.snare,.hihat,.openhat,.exhaust{
@@ -113,7 +113,7 @@ i,svg{
 }
 
 .pad{
-    transition: all 0.5s ease;
+    transition: all 1s ease;
 }
 
 .play{
@@ -137,6 +137,31 @@ select{
     gap: 3rem;
     margin: 1.6rem;
 }
+.tempo{
+    margin:1rem;
+    width: 30%;
+}
+.tempo-slider{
+    padding:0.2rem;
+    -webkit-appearance: none ;
+    margin: none;
+    width: 100%;
+    position: relative;
+    background-color: rgb(80 , 80, 80);
+    cursor: pointer;
+    border-radius: 1rem;
+}
+.tempo p{
+    font-size: 1rem;
+    margin: 0.1rem;
+    text-align: center;
+}
+
+.mute.active{
+    background-color: rgba(158, 162, 162, 0.693);
+}
+
+
 
 @keyframes playTrack {
     from{

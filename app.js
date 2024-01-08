@@ -6,17 +6,18 @@ class DrumKit {
     this.currentSnare = "./sounds/snare-acoustic01.wav";
     this.currentHihat = "./sounds/hihat-acoustic01.wav";
     this.currentOpenhat = "./sounds/openhat-acoustic01.wav";
-    this.currentExhaust = "./sounds/hellcat.wav";
+    this.currentExhaust = "./sounds/helllcat.wav";
     this.kickAudio = document.querySelector(".kick-sound");
     this.snareAudio = document.querySelector(".snare-sound");
     this.hihatAudio = document.querySelector(".hihat-sound");
     this.openhatAudio = document.querySelector(".openhat-sound");
     this.exhaustAudio = document.querySelector(".exhaust-sound");
     this.index = 0;
-    this.bpm = 150; //bits per minute means how fast loop over
+    this.bpm = 100; //bits per minute means how fast loop over
     this.isPlaying = null;
     this.selects = document.querySelectorAll("select");
     this.muteBtns = document.querySelectorAll(".mute");
+    this.tempoSlider = document.querySelector(".tempo-slider");
   }
   activePad() {
     this.classList.toggle("active");
@@ -52,7 +53,7 @@ class DrumKit {
           this.openhatAudio.play();
         }
         if (bar.classList.contains("exhaust-pad")) {
-          this.exhaustAudio.currentTime = 7;
+          this.exhaustAudio.currentTime = 0;
           this.exhaustAudio.play();
         }
       }
@@ -109,7 +110,59 @@ class DrumKit {
     }
   }
   mute(e) {
-    console.log(e);
+    const muteIndex = e.target.getAttribute("data-track");
+    e.target.classList.toggle("active");
+    if (e.target.classList.contains("active")) {
+      switch (muteIndex) {
+        case "0":
+          this.kickAudio.volume = 0;
+          break;
+        case "1":
+          this.snareAudio.volume = 0;
+          break;
+        case "2":
+          this.hihatAudio.volume = 0;
+          break;
+        case "3":
+          this.openhatAudio.volume = 0;
+          break;
+        case "4":
+          this.exhaustAudio.volume = 0;
+          break;
+      }
+    } else {
+      switch (muteIndex) {
+        case "0":
+          this.kickAudio.volume = 1;
+          break;
+        case "1":
+          this.snareAudio.volume = 1;
+          break;
+        case "2":
+          this.hihatAudio.volume = 1;
+          break;
+        case "3":
+          this.openhatAudio.volume = 1;
+          break;
+        case "4":
+          this.exhaustAudio.volume = 1;
+          break;
+      }
+    }
+  }
+  changeTempo(e) {
+    const tempoText = document.querySelector(".tempo-nr");
+
+    tempoText.innerText = e.target.value;
+  }
+  updateTempo(e) {
+    this.bpm = e.target.value;
+    clearInterval(this.isPlaying);
+    this.isPlaying = null;
+    const playBtn = document.querySelector(".play");
+    if (playBtn.classList.contains("active")) {
+      this.start();
+    }
   }
 }
 
@@ -140,6 +193,14 @@ drumKit.selects.forEach((select) => {
 
 drumKit.muteBtns.forEach((btn) => {
   btn.addEventListener("click", function (e) {
-    drumKit.muteBtns(e);
+    drumKit.mute(e);
   });
+});
+
+drumKit.tempoSlider.addEventListener("input", function (e) {
+  drumKit.changeTempo(e);
+});
+
+drumKit.tempoSlider.addEventListener("change", function (e) {
+  drumKit.updateTempo(e);
 });
