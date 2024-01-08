@@ -132,8 +132,16 @@ select{
     margin-left: 1rem ;
 }
 
-.play-tempo{
+.play-btn{
     display: flex;
     gap: 3rem;
     margin: 1.6rem;
+}
+
+@keyframes playTrack {
+    from{
+        transform: scale(1);
+    }to{
+        transform: scale(1.2);
+    }
 }
