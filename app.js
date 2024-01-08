@@ -13,9 +13,10 @@ class DrumKit {
     this.openhatAudio = document.querySelector(".openhat-sound");
     this.exhaustAudio = document.querySelector(".exhaust-sound");
     this.index = 0;
-    this.bpm = 200; //bits per minute means how fast loop over
+    this.bpm = 150; //bits per minute means how fast loop over
     this.isPlaying = null;
-    this.selects = document.querySelector("select");
+    this.selects = document.querySelectorAll("select");
+    this.muteBtns = document.querySelectorAll(".mute");
   }
   activePad() {
     this.classList.toggle("active");
@@ -86,12 +87,36 @@ class DrumKit {
       this.playBtn.classList.remove("active");
     }
   }
+  changeSound(e) {
+    const selectionName = e.target.name;
+    const selectionValue = e.target.value;
+    switch (selectionName) {
+      case "kick-select":
+        this.kickAudio.src = selectionValue;
+        break;
+      case "snare-select":
+        this.snareAudio.src = selectionValue;
+        break;
+      case "hihat-select":
+        this.hihatAudio.src = selectionValue;
+        break;
+      case "openhat-select":
+        this.openhatAudio.src = selectionValue;
+        break;
+      case "exhaust-select":
+        this.exhaustAudio.src = selectionValue;
+        break;
+    }
+  }
+  mute(e) {
+    console.log(e);
+  }
 }
 
 const drumKit = new DrumKit();
 // drumKit.start();
 
-//event listner
+//Event listners
 
 drumKit.pads.forEach((pad) => {
   pad.addEventListener("click", drumKit.activePad);
@@ -107,7 +132,14 @@ drumKit.playBtn.addEventListener("click", function () {
 });
 
 drumKit.selects.forEach((select) => {
-  select.addEventListener("change", function () {
-    drumKit.changeSound();
+  //we want to make callback function to run follow function
+  select.addEventListener("change", function (e) {
+    drumKit.changeSound(e);
+  });
+});
+
+drumKit.muteBtns.forEach((btn) => {
+  btn.addEventListener("click", function (e) {
+    drumKit.muteBtns(e);
   });
 });
