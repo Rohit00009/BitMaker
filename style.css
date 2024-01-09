@@ -13,15 +13,16 @@ body{
     color: white;
     min-height: 100vh;
     backdrop-filter: blur(10px);;
+    padding-top: 4rem;
 }
 i,svg{
     pointer-events: none;
 }
 
-.kick-pad,.snare-pad,.hihat-pad,.openhat-pad,.exhaust-pad{
+.kick-pad,.snare-pad,.hihat-pad{
     width: 2.5rem;
     height: 2.5rem;
-    margin: 0.3rem 0.5rem;
+    margin: 0.6rem 0.6rem;
     cursor: pointer;
 }
 
@@ -37,13 +38,7 @@ i,svg{
     background: rgb(107, 107, 230);
 }
 
-.openhat-pad{
-    background: rgb(224, 175, 85);
-}
 
-.exhaust-pad{
-    background: rgb(218, 88, 88);
-}
 
 .kick-pad.active{
     background: rgb(156, 36, 156);
@@ -57,17 +52,12 @@ i,svg{
     background: rgb(53, 53, 117);
 }
 
-.openhat-pad.active{
-    background: rgb(148, 116, 58);
-}
 
-.exhaust-pad.active{
-    background: rgb(146, 55, 55);
-}
 
 
 
 .sequencer{
+    margin:auto;
     display: flex;
     min-height: 50vh;
     flex-direction: column;
@@ -76,7 +66,7 @@ i,svg{
 }
 
 
-.kick-track,.snare-track,.hihat-track,.openhat-track,.exhaust-track{
+.kick-track,.snare-track,.hihat-track{
     display: flex;
     align-items: center;
     width: 50%;
@@ -84,7 +74,7 @@ i,svg{
     margin-top: 4rem;
 }
 
-.kick,.snare,.hihat,.openhat,.exhaust{
+.kick,.snare,.hihat{
     display: flex;
 }
 
@@ -109,11 +99,11 @@ i,svg{
     color: white;
     font-size: 1rem;
     cursor: pointer;
-    transition: all 0.5s ease;
+    transition: all 0.3s ease;
 }
 
 .pad{
-    transition: all 1s ease;
+    transition: all 0.3s ease;
 }
 
 .play{
@@ -135,7 +125,7 @@ select{
 .play-btn{
     display: flex;
     gap: 3rem;
-    margin: 1.6rem;
+    margin: 3rem;
 }
 .tempo{
     margin:1rem;

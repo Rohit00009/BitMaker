@@ -2,22 +2,20 @@ class DrumKit {
   constructor() {
     this.pads = document.querySelectorAll(".pad");
     this.playBtn = document.querySelector(".play");
-    this.currentKick = "./sounds/kick-classic.wav";
-    this.currentSnare = "./sounds/snare-acoustic01.wav";
-    this.currentHihat = "./sounds/hihat-acoustic01.wav";
-    this.currentOpenhat = "./sounds/openhat-acoustic01.wav";
-    this.currentExhaust = "./sounds/helllcat.wav";
-    this.kickAudio = document.querySelector(".kick-sound");
-    this.snareAudio = document.querySelector(".snare-sound");
-    this.hihatAudio = document.querySelector(".hihat-sound");
-    this.openhatAudio = document.querySelector(".openhat-sound");
-    this.exhaustAudio = document.querySelector(".exhaust-sound");
-    this.index = 0;
-    this.bpm = 100; //bits per minute means how fast loop over
-    this.isPlaying = null;
     this.selects = document.querySelectorAll("select");
     this.muteBtns = document.querySelectorAll(".mute");
     this.tempoSlider = document.querySelector(".tempo-slider");
+    //audio src
+    this.currentKick = "./sounds/kick-classic.wav";
+    this.currentSnare = "./sounds/snare-acoustic01.wav";
+    this.currentHihat = "./sounds/hihat-acoustic01.wav";
+    //all audios
+    this.kickAudio = document.querySelector(".kick-sound");
+    this.snareAudio = document.querySelector(".snare-sound");
+    this.hihatAudio = document.querySelector(".hihat-sound");
+    this.index = 0;
+    this.bpm = 150; //bits per minute means how fast loop over
+    this.isPlaying = null;
   }
   activePad() {
     this.classList.toggle("active");
@@ -31,7 +29,7 @@ class DrumKit {
     //console.log(step); --> to see our step works or not!
     //loop over the pads
     activeBars.forEach((bar) => {
-      bar.style.animation = `playTrack 0.3s alternate ease-in-out 2`;
+      bar.style.animation = "playTrack 0.3s alternate ease-in-out 2";
       //check if pads are active!
       //null
       if (bar.classList.contains("active")) {
@@ -48,44 +46,30 @@ class DrumKit {
           this.hihatAudio.currentTime = 0;
           this.hihatAudio.play();
         }
-        if (bar.classList.contains("openhat-pad")) {
-          this.openhatAudio.currentTime = 0;
-          this.openhatAudio.play();
-        }
-        if (bar.classList.contains("exhaust-pad")) {
-          this.exhaustAudio.currentTime = 0;
-          this.exhaustAudio.play();
-        }
       }
     });
     this.index++;
   }
   //lets make start method which also repeat method
   start() {
-    // console.log(this);
-    const interval = (60 / this.bpm) * 1000;
-    //check if its playing
-    if (this.isPlaying) {
-      //clear the interval
-      clearInterval(this.isPlaying);
-      console.log(this.isPlaying);
-      this.isPlaying = null;
-      //
-    } else {
+    let interval = (60 / this.bpm) * 1000;
+    if (!this.isPlaying) {
       this.isPlaying = setInterval(() => {
-        //arrow function keeps outer function and do not let it to refer to window
         this.repeat();
       }, interval);
+    } else {
+      clearInterval(this.isPlaying);
+      this.isPlaying = null;
     }
   }
   updateBtn() {
     //null
     if (!this.isPlaying) {
-      this.playBtn.innerText = "Stop";
-      this.playBtn.classList.add("active");
-    } else {
       this.playBtn.innerText = "Play";
       this.playBtn.classList.remove("active");
+    } else {
+      this.playBtn.innerText = "Stop";
+      this.playBtn.classList.add("active");
     }
   }
   changeSound(e) {
@@ -101,12 +85,6 @@ class DrumKit {
       case "hihat-select":
         this.hihatAudio.src = selectionValue;
         break;
-      case "openhat-select":
-        this.openhatAudio.src = selectionValue;
-        break;
-      case "exhaust-select":
-        this.exhaustAudio.src = selectionValue;
-        break;
     }
   }
   mute(e) {
@@ -115,54 +93,55 @@ class DrumKit {
     if (e.target.classList.contains("active")) {
       switch (muteIndex) {
         case "0":
-          this.kickAudio.volume = 0;
+          this.kickAudio.muted = true;
           break;
         case "1":
-          this.snareAudio.volume = 0;
+          this.snareAudio.muted = true;
           break;
         case "2":
-          this.hihatAudio.volume = 0;
-          break;
-        case "3":
-          this.openhatAudio.volume = 0;
-          break;
-        case "4":
-          this.exhaustAudio.volume = 0;
+          this.hihatAudio.muted = true;
           break;
       }
     } else {
       switch (muteIndex) {
         case "0":
-          this.kickAudio.volume = 1;
+          this.kickAudio.muted = false;
           break;
         case "1":
-          this.snareAudio.volume = 1;
+          this.snareAudio.muted = false;
           break;
         case "2":
-          this.hihatAudio.volume = 1;
-          break;
-        case "3":
-          this.openhatAudio.volume = 1;
-          break;
-        case "4":
-          this.exhaustAudio.volume = 1;
+          this.hihatAudio.muted = false;
           break;
       }
     }
   }
-  changeTempo(e) {
-    const tempoText = document.querySelector(".tempo-nr");
+  // changeTempo(e) {
+  //   const tempoText = document.querySelector(".tempo-nr");
 
-    tempoText.innerText = e.target.value;
-  }
-  updateTempo(e) {
-    this.bpm = e.target.value;
+  //   tempoText.innerText = e.target.value;
+  // }
+  // updateTempo(e) {
+  //   clearInterval(this.isPlaying);
+  //   this.bpm = e.target.value;
+  //   this.isPlaying = null;
+  //   const playBtn = document.querySelector(".play");
+  //   if (playBtn.classList.contains("active")) {
+  //     this.start();
+  //   }
+  // }
+  changeTempo(e) {
     clearInterval(this.isPlaying);
     this.isPlaying = null;
-    const playBtn = document.querySelector(".play");
+    let playBtn = document.querySelector(".play");
     if (playBtn.classList.contains("active")) {
       this.start();
     }
+  }
+  updateTempo(e) {
+    let tempoNo = document.querySelector(".tempo-nr");
+    this.bpm = e.target.value;
+    tempoNo.innerText = e.target.value;
   }
 }
 
@@ -178,10 +157,10 @@ drumKit.pads.forEach((pad) => {
   });
 });
 
-drumKit.playBtn.addEventListener("click", function () {
-  drumKit.updateBtn();
+drumKit.playBtn.addEventListener("click", () => {
   //and we added callback function
   drumKit.start();
+  drumKit.updateBtn();
 });
 
 drumKit.selects.forEach((select) => {
@@ -198,9 +177,9 @@ drumKit.muteBtns.forEach((btn) => {
 });
 
 drumKit.tempoSlider.addEventListener("input", function (e) {
-  drumKit.changeTempo(e);
+  drumKit.updateTempo(e);
 });
 
 drumKit.tempoSlider.addEventListener("change", function (e) {
-  drumKit.updateTempo(e);
+  drumKit.changeTempo(e);
 });
