@@ -6,13 +6,15 @@
 
 body{
     font-family: sans-serif;
+    background-color: rgba(70, 69, 69, 0.256);
     background-image: url(./wp3433639.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     color: white;
     min-height: 100vh;
-    backdrop-filter: blur(10px);;
+    backdrop-filter: blur(10px);
+    background-blend-mode: multiply;
     padding-top: 4rem;
 }
 i,svg{
@@ -27,29 +29,29 @@ i,svg{
 }
 
 .kick-pad{
-    background: rgb(220, 136, 220);
+    background:#f5ebe0;
 }
 
 .snare-pad{
-    background: rgb(114, 71, 145);
+    background: #90e0ef;
 }
 
 .hihat-pad{
-    background: rgb(107, 107, 230);
+    background:#d5b9b2;
 }
 
 
 
 .kick-pad.active{
-    background: rgb(156, 36, 156);
+    background:#e7bd91 ;
 }
 
 .snare-pad.active{
-    background: rgb(73, 44, 94);
+    background: #64dcf1;
 }
 
 .hihat-pad.active{
-    background: rgb(53, 53, 117);
+    background: #e29f8e;
 }
 
 
